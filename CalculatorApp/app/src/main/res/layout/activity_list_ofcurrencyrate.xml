@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".ListOfcurrencyrate"
+    >
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/back"
+        android:id="@+id/list_back_button"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Search_currencies"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_toRightOf="@id/list_back_button"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"/>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        app:icon="@drawable/search_icon"
+        android:id="@+id/search_next"/>
+
+
+<LinearLayout
+    android:layout_marginTop="50dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:background="@color/white" />
+</LinearLayout>
+
+</RelativeLayout>
