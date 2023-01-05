@@ -1,9 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".QuestionModel">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <TextView
+            android:id="@+id/question_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="what is the name of the country of the flag?"
+            android:gravity="center"
+            android:padding="16dp"
+            android:layout_margin="10dp"
+            android:textSize="25sp"/>
+
+        <ImageView
+            android:id="@+id/flag_imageView"
+            android:contentDescription="@string/flags"
+            android:layout_marginTop="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:src="@drawable/ic_flag_of_india"
+            android:layout_gravity="center"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center_vertical"
+          android:layout_marginTop="16dp">
+          <ProgressBar
+              android:id="@+id/progressBar"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:max="10"
+              android:minHeight="50dp"
+              android:progress="0"
+              style="?android:attr/progressBarStyleHorizontal"
+              android:indeterminate="false"
+              />
+          <TextView
+              android:id="@+id/text_progressBar"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:padding="15dp"
+              android:textSize="14sp"
+              tools:text="1/10"
+              />
+      </LinearLayout>
+        <TextView
+            android:id="@+id/tv_option1"
+            android:outlineProvider="background"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="India"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:padding="15dp"
+            android:background="@drawable/text_view_bodder"
+            />
+        <TextView
+            android:id="@+id/tv_option2"
+            android:outlineProvider="background"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="India"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:padding="15dp"
+            android:background="@drawable/text_view_bodder"
+            />
+        <TextView
+            android:id="@+id/tv_option3"
+            android:outlineProvider="background"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="India"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:padding="15dp"
+            android:background="@drawable/text_view_bodder"
+            />
+        <TextView
+            android:id="@+id/tv_option4"
+            android:outlineProvider="background"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="India"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:padding="15dp"
+            android:background="@drawable/text_view_bodder"
+            />
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/submit"
+            android:textAllCaps="true"
+            android:textSize="25sp"
+            android:background="@drawable/text_view_bodder"/>
+
+    </LinearLayout>
+
+</ScrollView>
