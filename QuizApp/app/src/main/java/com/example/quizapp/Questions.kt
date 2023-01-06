@@ -11,3 +11,13 @@ data class Questions(
     val correctAnswer:Int
 
 )
+data class QuestionsNoImage(
+    val id:Int,
+    val question:String,
+    val optionOne:String,
+    val optionTwo:String,
+    val optionThree:String,
+    val optionFour:String,
+    val correctAnswer:Int
+
+)

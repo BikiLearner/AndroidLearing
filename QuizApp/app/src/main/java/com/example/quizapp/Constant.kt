@@ -112,4 +112,33 @@ const val CORRECT_ANSWER : String="correct_answer"
 
         return questionsList
     }
+    fun javaQuestion():ArrayList<QuestionsNoImage>{
+        val questionsList2 = ArrayList<QuestionsNoImage>()
+
+        var que1=QuestionsNoImage(1,
+            "Which Set class should be most popular in a multi-threading environment, considering performance constraint?",
+            "HashSet"," ConcurrentSkipListSet","LinkedHashSet", " CopyOnWriteArraySet",
+            2
+
+        )
+        questionsList2.add(que1)
+        var que2=QuestionsNoImage(2,
+            "Which Map class should be most popular in a multi-threading environment, considering performance constraint?",
+            "Hashtable","CopyOnWriteMap"," ConcurrentHashMap", "ConcurrentMap",
+            2
+
+        )
+        questionsList2.add(que2)
+        var que3=QuestionsNoImage(3,
+            "Which allows the removal of elements from a collection?",
+            " Enumeration","Iterator","Both", "None of the above",
+            4
+
+        )
+        questionsList2.add(que3)
+
+
+
+        return questionsList2
+    }
 }
