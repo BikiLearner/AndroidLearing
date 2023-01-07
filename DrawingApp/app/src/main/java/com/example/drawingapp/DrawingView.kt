@@ -22,10 +22,25 @@ class DrawingView(context:Context,attri:AttributeSet): View(context,attri) {
     private var color=Color.BLACK
     private var canvas:Canvas?=null
     private var mpath=ArrayList<CustomPath>()
+    private var mUndoPath=ArrayList<CustomPath>()
 
     init {
         setUpDrawing()
     }
+
+    fun onClickUndo(){
+        if(mpath.size > 0 ){
+            mUndoPath.add(mpath.removeAt(mpath.size -1))
+            invalidate()
+        }
+    }
+    fun onClickRedo(){
+        if(mUndoPath.size > 0 ){
+            mpath.add(mUndoPath.removeAt(mUndoPath.size -1))
+            invalidate()
+        }
+    }
+
     private fun setUpDrawing(){
         drawPaint=Paint()
         drawPath=CustomPath(color,brushThickness)
@@ -98,6 +113,15 @@ class DrawingView(context:Context,attri:AttributeSet): View(context,attri) {
         newSize,resources.displayMetrics
             )
         drawPaint!!.strokeWidth=brushThickness
+    }
+
+    fun selectColor(newColor:String){
+        color=Color.parseColor(newColor)
+        drawPaint!!.color=color
+    }
+    fun selectColor2(newColor:Int){
+        color=newColor
+        drawPaint!!.color=color
     }
 
    internal inner class CustomPath(var color:Int,var brushThickness:Float) : Path() {

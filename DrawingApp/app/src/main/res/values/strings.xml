@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">DrawingApp</string>
+    <string name="button">Button</string>
+    <string name="brush_buttom">brush Buttom</string>
+    <string name="image_button_thickness">image_button_thickness</string>
+    <string name="eraser_button">Eraser_button</string>
+    <string name="color_button">color_button</string>
+    <string name="adding_image_to_canvas">adding_Image_to_canvas</string>
+    <string name="image_button_to_add_image_from_local_folder">image button to add image from local folder</string>
+    <string name="_10">10</string>
+    <string name="undo_button">undo button</string>
+    <string name="please_wait">Please wait...</string>
+</resources>
