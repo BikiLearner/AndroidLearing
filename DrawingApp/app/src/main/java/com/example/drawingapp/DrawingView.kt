@@ -1,5 +1,5 @@
 package com.example.drawingapp
-
+//drawing custom view
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -27,7 +27,10 @@ class DrawingView(context:Context,attri:AttributeSet): View(context,attri) {
     init {
         setUpDrawing()
     }
-
+/*to undo using onClickUndo
+    removing the path from the mpath and adding that removed path to mUndoPath(storing the path so that i can recover it later)
+    invalidate() function calls the onDraw function as it is a function parameter inside graphics
+    */
     fun onClickUndo(){
         if(mpath.size > 0 ){
             mUndoPath.add(mpath.removeAt(mpath.size -1))
@@ -40,7 +43,10 @@ class DrawingView(context:Context,attri:AttributeSet): View(context,attri) {
             invalidate()
         }
     }
-
+/* it bassically setup the pencil color with stroke etc
+* drawPaint is a object of function paint() of class paint
+* and drawpath is a object of customePath(which set color of brush/pencil and it's thickness)
+* */
     private fun setUpDrawing(){
         drawPaint=Paint()
         drawPath=CustomPath(color,brushThickness)
@@ -51,7 +57,7 @@ class DrawingView(context:Context,attri:AttributeSet): View(context,attri) {
         canvasPaint=Paint(Paint.DITHER_FLAG)
 //        brushThickness=20.toFloat()
     }
-
+//it bassically change the size of the pen or brush
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         bitmapCanvas=Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888)

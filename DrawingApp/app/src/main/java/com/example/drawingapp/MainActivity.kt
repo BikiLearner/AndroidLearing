@@ -3,6 +3,7 @@ package com.example.drawingapp
 import android.Manifest
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -10,9 +11,13 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.media.MediaScannerConnection
 import android.media.MediaScannerConnection.MediaScannerConnectionClient
+import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.EditText
@@ -23,6 +28,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
@@ -35,6 +41,8 @@ import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.io.OutputStream
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -65,7 +73,6 @@ class MainActivity : AppCompatActivity() {
             permission.entries.forEach{
                 val permissionName=it.key
                 val permissionGranted=it.value
-
                 if(permissionGranted){
                     Toast.makeText(this,"Permission granted for $permissionName",Toast.LENGTH_SHORT).show()
 
@@ -126,8 +133,9 @@ class MainActivity : AppCompatActivity() {
                 showProgressdialog()
                 lifecycleScope.launch{
                     val fldrawingView=findViewById<FrameLayout>(R.id.frame_layout)
-                    saveBitmapFile(getBitmapImage(fldrawingView))
+                    saveBitmapFile2(getBitmapImage(fldrawingView))
                 }
+               //
             }
         }
 
@@ -210,7 +218,7 @@ colorPicker?.setOnClickListener{
 
             override fun onOk(dialog: AmbilWarnaDialog?, color: Int) {
 
-               Toast.makeText(this@MainActivity,color.toString(),Toast.LENGTH_LONG).show()
+              // Toast.makeText(this@MainActivity,color.toString(),Toast.LENGTH_LONG).show()
                 drawingView?.selectColor2(color)
             }
 
@@ -220,26 +228,57 @@ colorPicker?.setOnClickListener{
     }
 }
     private fun isReadStorageAllowed():Boolean{
-        val result=ContextCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE)
-
-        return result== PackageManager.PERMISSION_GRANTED
+        val result=ContextCompat.checkSelfPermission(this,Manifest.permission.READ_MEDIA_IMAGES)
+        val result1=ContextCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE)
+        return (result== PackageManager.PERMISSION_GRANTED || result1 == PackageManager.PERMISSION_GRANTED)
      }
 
     private fun requestStorageFunctionality(){
-        if(ActivityCompat.shouldShowRequestPermissionRationale(
-                this,Manifest.permission.READ_EXTERNAL_STORAGE)
-        ){
-            showRationaleDialog("DrawingApp","DrawingApp need to access your External Storage")
+        if(Build.VERSION.SDK_INT>=32){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(
+                    this,Manifest.permission.READ_MEDIA_IMAGES)
+            ){
+                showRationaleDialog("DrawingApp","DrawingApp need to access your External Storage")
 
-        }else{
-            requestPermission.launch(arrayOf(
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            }else{
+                requestPermission.launch(arrayOf(
+                    Manifest.permission.READ_MEDIA_IMAGES
 
-            ))
+                ))
+            }
+        }else {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this, Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+            ) {
+                showRationaleDialog("DrawingApp", "DrawingApp need to access your External Storage")
+
+            } else {
+                requestPermission.launch(
+                    arrayOf(
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+//                Manifest.permission.WRITE_EXTERNAL_STORAGE
+
+                    )
+                )
+            }
         }
 
     }
+//    private fun requestStorageFunctionality2(){
+//        if(ActivityCompat.shouldShowRequestPermissionRationale(
+//                this,Manifest.permission.READ_MEDIA_IMAGES)
+//        ){
+//            showRationaleDialog("DrawingApp","DrawingApp need to access your External Storage")
+//
+//        }else{
+//            requestPermission.launch(arrayOf(
+//                Manifest.permission.READ_MEDIA_IMAGES
+//
+//            ))
+//        }
+//
+//    }
     private fun showRationaleDialog(
         title: String,
         message: String,
@@ -267,43 +306,71 @@ colorPicker?.setOnClickListener{
         return returnBitmap
 
     }
+//for lesser version saving file
+//    private suspend fun saveBitmapFile(mBitmap:Bitmap?):String{
+//        var result=""
+//        withContext(Dispatchers.IO){
+//            if(mBitmap!=null){
+//                try {
+//                    val bytes=ByteArrayOutputStream()
+//                    mBitmap.compress(Bitmap.CompressFormat.PNG,90,bytes)
+//
+//                    val f=File(externalCacheDir?.absoluteFile.toString() +
+//                    File.separator + "DrawingApp_" + System.currentTimeMillis()/1000 + ".png")
+//                    val fo=FileOutputStream(f)
+//                    fo.write(bytes.toByteArray())
+//                    fo.close()
+//
+//                    result =f.absolutePath
+//
+//                    runOnUiThread{
+//                        cancelProgressDialog()
+//                        if(result.isNotEmpty()) {
+//                            Toast.makeText(
+//                                this@MainActivity,
+//                                "File Save successfully  : $result",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
+//                            shareImg(result)
+//                        }else
+//                            Toast.makeText(this@MainActivity,"Something went wrong saving the file",Toast.LENGTH_SHORT).show()
+//                    }
+//                }catch (e:Exception){
+//                    result=""
+//                    e.printStackTrace()
+//                }
+//            }
+//        }
+//        return result
+//    }
 
-    private suspend fun saveBitmapFile(mBitmap:Bitmap?):String{
-        var result=""
-        withContext(Dispatchers.IO){
-            if(mBitmap!=null){
-                try {
-                    val bytes=ByteArrayOutputStream()
-                    mBitmap.compress(Bitmap.CompressFormat.PNG,90,bytes)
+    private fun saveBitmapFile2(mBitmap:Bitmap?){
+        val fos: OutputStream
 
-                    val f=File(externalCacheDir?.absoluteFile.toString() +
-                    File.separator + "DrawingApp_" + System.currentTimeMillis()/1000 + ".png")
-                    val fo=FileOutputStream(f)
-                    fo.write(bytes.toByteArray())
-                    fo.close()
 
-                    result =f.absolutePath
+        try {
+            if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.Q){
+                val resolver = contentResolver
+                val contentValue= ContentValues()
+                contentValue.put(MediaStore.MediaColumns.DISPLAY_NAME,"Image_"+".jpg")
+                contentValue.put(MediaStore.MediaColumns.MIME_TYPE,"image/jpg")
+                contentValue.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES+File.separator+"DrawingApp")
+                val imageUri=resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,contentValue)
+                fos=resolver.openOutputStream(Objects.requireNonNull(imageUri)!!)!!
+                mBitmap?.compress(Bitmap.CompressFormat.JPEG,100,fos)
+                Objects.requireNonNull<OutputStream?>(fos)
 
-                    runOnUiThread{
-                        cancelProgressDialog()
-                        if(result.isNotEmpty()) {
-                            Toast.makeText(
-                                this@MainActivity,
-                                "File Save successfully  : $result",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            shareImg(result)
-                        }else
-                            Toast.makeText(this@MainActivity,"Something went wrong saving the file",Toast.LENGTH_SHORT).show()
-                    }
-                }catch (e:Exception){
-                    result=""
-                    e.printStackTrace()
+                runOnUiThread{
+                    cancelProgressDialog()
+                    Toast.makeText(this,"File Saved",Toast.LENGTH_LONG).show()
                 }
+
             }
+        }catch (e :Exception){
+            Toast.makeText(this,"File Save unsuccessful",Toast.LENGTH_LONG).show()
         }
-        return result
     }
+
 private fun showProgressdialog(){
     customProgressDialog=Dialog(this@MainActivity)
     customProgressDialog?.setContentView(R.layout.custom_progress_dialog)
