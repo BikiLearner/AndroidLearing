@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">TextToSpeech</string>
+    <string name="hello_world_welcome_to_text_to_speech">Hello World welcome to text to speech</string>
+    <string name="text_to_convert_into_speech">Text to convert into speech</string>
+    <string name="start_speech">start speech</string>
+</resources>

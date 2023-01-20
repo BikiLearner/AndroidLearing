@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NoteActivity"
+    >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/custom_tool_bar_note_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Toolbar"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:layout_gravity="right"
+            tools:ignore="RtlHardcoded">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/undo_btn"
+                android:layout_width="20dp"
+                android:layout_height="40dp"
+
+                />
+            <com.google.android.material.button.MaterialButton
+                android:layout_marginStart="5dp"
+                android:id="@+id/redo_btn"
+                android:layout_width="20dp"
+                android:layout_height="40dp"
+
+                />
+            <com.google.android.material.button.MaterialButton
+                android:layout_marginStart="5dp"
+                android:id="@+id/done_btn"
+                android:layout_width="20dp"
+                android:layout_height="40dp"
+
+                />
+
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+    <EditText
+        android:id="@+id/ed_title"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/custom_tool_bar_note_activity"
+        android:background="@drawable/edit_text_bacground"
+        android:textSize="30sp"
+        android:text=""
+        android:hint="@string/title"
+        style="@style/textColorTitle"
+        android:autofillHints=""
+        tools:ignore="LabelFor"
+        android:layout_margin="10dp"/>
+    <LinearLayout
+        android:id="@+id/ll_date_character"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/ed_title"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/date_time_note_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="date"
+            android:textSize="15sp"
+            android:layout_marginEnd="10dp"/>
+        <View
+            android:layout_width="2dp"
+            android:layout_height="20dp"
+             />
+        <TextView
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/character"
+            android:textSize="15sp"/>
+        <TextView
+            android:layout_marginStart="5dp"
+            android:id="@+id/no_of_character_note_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="0"
+            android:textSize="15sp"/>
+    </LinearLayout>
+    <ScrollView
+        android:id="@+id/edit_note_sl"
+        android:layout_width="match_parent"
+        android:isScrollContainer="true"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_date_character"
+        android:layout_margin="10dp"
+        android:clickable="true"
+        android:focusable="true">
+        <EditText
+            android:id="@+id/the_note_ed_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:autofillHints=""
+            android:background="@drawable/edit_text_bacground"
+            android:gravity="top|start"
+            android:inputType="textMultiLine"
+            android:text=""
+
+            android:lines="25"
+            tools:ignore="LabelFor,MissingConstraints"
+            tools:layout_editor_absoluteX="7dp" />
+    </ScrollView>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
