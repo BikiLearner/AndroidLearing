@@ -1,53 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:id="@+id/item_note_cardView"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="10dp"
-    android:layout_margin="10dp"
-    android:elevation="10dp"
-    android:outlineAmbientShadowColor="@color/teal_700"
-    android:backgroundTint="@color/teal_700"
-    >
 
-    <LinearLayout
+    >
+    <RadioButton
+       android:visibility="gone"
+        tools:visibility="visible"
+        android:id="@+id/select_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/item_note_cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
-        <TextView
-            android:id="@+id/item_note_tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Title"
-            style="@style/textColorTitle"
-            />
-        <TextView
-            android:id="@+id/item_note_tv_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="content of the note in small quantity"
-            android:textSize="15sp"
-            style="@style/textColorTitle"
-
-            />
+        app:cardCornerRadius="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="5dp"
+        android:elevation="10dp"
+        android:backgroundTint="@color/teal_700">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
             <TextView
-                android:id="@+id/date_time"
+                android:id="@+id/item_note_tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
+                tools:text="Title"
                 style="@style/textColorTitle"
-                tools:text="kjfajfajkls"
                 />
+            <TextView
+                android:id="@+id/item_note_tv_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="content of the note in small quantity"
+                android:textSize="17sp"
+                style="@style/textColorTitle"
+
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                tools:ignore="UseCompoundDrawables">
+                <TextView
+                    android:layout_gravity="start"
+                    android:id="@+id/date_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    style="@style/textColorTitle"
+                    tools:text="5/25/2023 jan time"
+                    />
+                <ImageView
+                    android:id="@+id/lock_encrypt"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/lock_2_o"
+                    android:layout_marginStart="40dp"
+                    android:visibility="invisible"
+                    android:contentDescription="@string/lock_icon" />
+            </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 
 
-</androidx.cardview.widget.CardView>
+</LinearLayout>

@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">NotesApp</string>
+    <string name="add_new_note">add_new_note</string>
+    <string name="title">Title</string>
+    <string name="character">character</string>
+    <string name="delete">delete</string>
+    <string name="encryption">Encryption</string>
+    <string name="move_to_folder">Move to folder</string>
+    <string name="pin">pin</string>
+    <string name="tickbtn">tickbtn</string>
+    <string name="searchbtn">searchbtn</string>
+    <string name="menubtn">menubtn</string>
+    <string name="setting">Setting</string>
+    <string name="sync">sync</string>
+    <string name="no_note_present">No note present</string>
+    <string name="redo_btn">redo btn</string>
+    <string name="done_btn">Done btn</string>
+    <string name="undo_btn">undo btn</string>
+    <string name="lock_icon">lock icon</string>
+    <string name="select_all">Select all</string>
+</resources>

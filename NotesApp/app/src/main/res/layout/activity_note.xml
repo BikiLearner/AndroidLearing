@@ -22,26 +22,33 @@
             android:layout_gravity="right"
             tools:ignore="RtlHardcoded">
 
-            <com.google.android.material.button.MaterialButton
+            <ImageButton
                 android:id="@+id/undo_btn"
-                android:layout_width="20dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/undo_2_o"
+                android:background="@drawable/button_square"
 
-                />
-            <com.google.android.material.button.MaterialButton
+
+                android:contentDescription="@string/undo_btn" />
+            <ImageButton
                 android:layout_marginStart="5dp"
                 android:id="@+id/redo_btn"
-                android:layout_width="20dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/redo_2_o"
+                android:background="@drawable/button_square"
 
-                />
-            <com.google.android.material.button.MaterialButton
+                android:contentDescription="@string/redo_btn" />
+            <ImageButton
                 android:layout_marginStart="5dp"
                 android:id="@+id/done_btn"
-                android:layout_width="20dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/tick_new_app"
+                android:background="@drawable/button_square"
 
-                />
+                android:contentDescription="@string/done_btn" />
 
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
